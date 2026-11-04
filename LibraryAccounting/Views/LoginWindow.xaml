@@ -1,0 +1,46 @@
+﻿<Window x:Class="LibraryAccounting.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Авторизация — Учёт книжного фонда библиотеки"
+        Width="460" Height="380"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="{StaticResource AccentBrush}" Padding="20,16">
+            <StackPanel>
+                <TextBlock Text="Учёт книжного фонда библиотеки"
+                           Foreground="White" FontSize="17" FontWeight="Bold"/>
+                <TextBlock Text="Вход в систему по логину и паролю"
+                           Foreground="#CCFBF1" FontSize="12" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="{StaticResource CardBrush}"
+                Margin="24,20" Padding="24,20" CornerRadius="6"
+                BorderBrush="{StaticResource LineBrush}" BorderThickness="1">
+            <StackPanel>
+                <TextBlock Text="Логин" FontWeight="SemiBold"/>
+                <TextBox x:Name="LoginBox" Margin="0,6,0,14"/>
+
+                <TextBlock Text="Пароль" FontWeight="SemiBold"/>
+                <PasswordBox x:Name="PasswordBox" Margin="0,6,0,18"/>
+
+                <Button Content="Войти в систему" Click="OnLoginClick"
+                        HorizontalAlignment="Left" MinWidth="160"/>
+                <Button Content="Выход" Click="OnExitClick"
+                        HorizontalAlignment="Left" MinWidth="160" Margin="0,10,0,0"
+                        Background="#64748B"/>
+
+                <TextBlock x:Name="ServerStatusText"
+                           Text="Сервер: localhost\SQLEXPRESS • База данных: LibraryDb"
+                           Foreground="{StaticResource MutedBrush}" FontSize="11"
+                           Margin="0,20,0,0"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
