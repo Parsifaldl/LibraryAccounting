@@ -1,7 +1,7 @@
 ﻿<Window x:Class="LibraryAccounting.Views.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Авторизация — Учёт книжного фонда библиотеки"
+        Title="Авторизация - Учёт книжного фонда библиотеки"
         Width="460" Height="380"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">

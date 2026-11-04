@@ -23,7 +23,7 @@ public class MainViewModel : ViewModelBase
     }
 
     public string CurrentUserInfo =>
-        $"{_currentUser.DisplayName} — {_currentUser.Role?.Name}";
+        $"{_currentUser.DisplayName} - {_currentUser.Role?.Name}";
 
     public ObservableCollection<CatalogRow> CatalogRows { get; } = [];
     public ObservableCollection<LoanRow> LoanRows { get; } = [];
