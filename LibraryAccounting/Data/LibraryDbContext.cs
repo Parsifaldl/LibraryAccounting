@@ -6,6 +6,11 @@ namespace LibraryAccounting.Data;
 
 public class LibraryDbContext : DbContext
 {
+    // Переопределяемая строка подключения: используется тестовым проектом
+    // (LibraryAccounting.Tests) для направления контекста данных
+    // на изолированную копию базы данных.
+    public static string? ConnectionStringOverride { get; set; }
+
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<User> Users => Set<User>();
     public DbSet<Genre> Genres => Set<Genre>();
@@ -28,7 +33,7 @@ public class LibraryDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer(LibraryConstants.ConnectionString);
+            optionsBuilder.UseSqlServer(ConnectionStringOverride ?? LibraryConstants.ConnectionString);
         }
     }
 
