@@ -1,4 +1,4 @@
-USE master;
+п»їUSE master;
 GO
 
 IF DB_ID(N'LibraryDb') IS NULL
@@ -200,5 +200,5 @@ CREATE TABLE OperationLog (
 );
 GO
 
-PRINT N'База данных LibraryDb успешно создана: 17 таблиц.';
+PRINT N'Р‘Р°Р·Р° РґР°РЅРЅС‹С… LibraryDb СѓСЃРїРµС€РЅРѕ СЃРѕР·РґР°РЅР°: 17 С‚Р°Р±Р»РёС†.';
 GO

@@ -107,7 +107,7 @@ public class LoanServiceTests
         Assert.NotNull(error);
         Assert.Contains("задолженность", error!);
         Assert.DoesNotContain(
-            context.Loans.ToList(),
+            context.Loans.Include(l => l.Copy).ToList(),
             l => l.Copy!.InventoryNumber == "ИН-000104");
     }
 

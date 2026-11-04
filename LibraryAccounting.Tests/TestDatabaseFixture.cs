@@ -1,10 +1,10 @@
-﻿using LibraryAccounting.Constants;
-using LibraryAccounting.Data;
-using Microsoft.Data.SqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using LibraryAccounting.Constants;
+using LibraryAccounting.Data;
+using Microsoft.Data.SqlClient;
 using Xunit;
 
 namespace LibraryAccounting.Tests;
@@ -25,6 +25,7 @@ public sealed class TestDatabaseFixture : IDisposable
             .ReadAllText(Path.Combine(scriptsDir, "FillDB.sql"))
             .Replace("LibraryDb", DatabaseName);
 
+        CreateEmptyCopy();
         ExecuteScript(createScript);
         ExecuteScript(fillScript);
 
@@ -68,6 +69,33 @@ public sealed class TestDatabaseFixture : IDisposable
         {
             InitialCatalog = "master",
         }.ConnectionString;
+    }
+
+    private static string? GetWorkingDatabaseCollation()
+    {
+        string workingDatabase = new SqlConnectionStringBuilder(
+            LibraryConstants.ConnectionString).InitialCatalog;
+
+        using var connection = new SqlConnection(MasterConnectionString());
+        connection.Open();
+        using var command = connection.CreateCommand();
+        command.CommandText =
+            "SELECT collation_name FROM sys.databases WHERE name = @name";
+        command.Parameters.AddWithValue("@name", workingDatabase);
+        return command.ExecuteScalar() as string;
+    }
+
+    private void CreateEmptyCopy()
+    {
+        string? collation = GetWorkingDatabaseCollation();
+
+        using var connection = new SqlConnection(MasterConnectionString());
+        connection.Open();
+        using var command = connection.CreateCommand();
+        command.CommandText = collation is null
+            ? $"CREATE DATABASE [{DatabaseName}]"
+            : $"CREATE DATABASE [{DatabaseName}] COLLATE {collation}";
+        command.ExecuteNonQuery();
     }
 
     private static void ExecuteScript(string script)
